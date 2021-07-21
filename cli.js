@@ -36,10 +36,6 @@ switch(args[0]){
             console.log(`${args[2]}: ${tokenIn}`);
         }
         break;
-    // case 'buy_with_hex':
-    //     tokenIn = args[2];
-    //     tokenOut = args[1];
-    //     break;
 }
 
 var wallet = fs.readFileSync("wallet").toString();

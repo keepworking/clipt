@@ -18,7 +18,7 @@ node cli.js buy wbnb cherry 0.001
 ```
 or
 ```
-node cli.js buy xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c cherry 0.001
+node cli.js buy 0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c cherry 0.001
 # if tokens are did not registred you can buy token with hex address
 ```
 

@@ -21,10 +21,20 @@ switch(args[0]){
         fs.writeFileSync("wallet", args[1])
         process.exit()
     case 'buy':
-        tokenOut = fs.readFileSync(args[1]).toString();
-        tokenIn = fs.readFileSync(args[2]).toString();
-        console.log(`${args[1]}: ${tokenOut}`);
-        console.log(`${args[2]}: ${tokenIn}`);
+        if(args[1].startsWith("0x")){
+            tokenOut = args[1]
+        }
+        else{
+            tokenOut = fs.readFileSync(args[1]).toString();
+            console.log(`${args[1]}: ${tokenOut}`);
+        }
+        if(args[2].startsWith("0x")){
+            tokenIn = args[2]
+        }
+        else{
+            tokenIn = fs.readFileSync(args[2]).toString();
+            console.log(`${args[2]}: ${tokenIn}`);
+        }
         break;
     // case 'buy_with_hex':
     //     tokenIn = args[2];

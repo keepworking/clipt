@@ -130,4 +130,5 @@ bot.js
 recipient
 wallet
 private_key
+timeout
 trade_test.js

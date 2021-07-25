@@ -5,9 +5,19 @@ const args = process.argv.slice(2)
 var tokenIn = ""
 var tokenOut = ""
 
-// console.log(args)
+var buyCount = 0;
+
+function sleep(millis) {
+    return new Promise(resolve => setTimeout(resolve, millis));
+}
 
 switch(args[0]){
+    case 'set_buy_count_delay':
+        fs.writeFileSync("buy_count_delay", args[1])
+        process.exit()
+    case 'set_buy_count':
+        fs.writeFileSync("buy_count", args[1])
+        process.exit()
     case 'register_token':
         fs.writeFileSync(args[1], args[2])
         process.exit()
@@ -41,11 +51,15 @@ switch(args[0]){
 var wallet = fs.readFileSync("wallet").toString();
 var timeout = parseFloat(fs.readFileSync("timeout").toString());
 var private_key = fs.readFileSync('private_key').toString();
+var buy_count = parseInt(fs.readFileSync('buy_count').toString());
+var buy_count_delay = parseInt(fs.readFileSync('buy_count_delay').toString());
+
 
 trade.setWallet(private_key)
 trade.setTimeout(timeout);
 
 buy = async () => {
+    buyCount++;
     console.log("start buy")
 
     result = await trade.buy(
@@ -60,7 +74,17 @@ buy = async () => {
     )
 
     console.log(result)
-    process.exit();
+    buyCount--;
+    if(buyCount == 0){
+        process.exit();
+    }
 }
 
-buy();
+main = async () => {
+    for (let index = 0; index < buy_count; index++) {
+        buy()
+        await sleep(buy_count_delay)
+    }
+}
+
+main()

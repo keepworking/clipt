@@ -12,6 +12,9 @@ function sleep(millis) {
 }
 
 switch(args[0]){
+    case 'set_provider':
+        fs.writeFileSync("provider", args[1])
+        process.exit();
     case 'set_slippage':
         fs.writeFileSync("slippage", args[1])
         process.exit()
@@ -51,6 +54,7 @@ switch(args[0]){
         break;
 }
 
+var provider = fs.readFileSync("provider").toString();
 var wallet = fs.readFileSync("wallet").toString();
 var timeout = parseFloat(fs.readFileSync("timeout").toString());
 var private_key = fs.readFileSync('private_key').toString();
@@ -58,7 +62,7 @@ var buy_count = parseInt(fs.readFileSync('buy_count').toString());
 var buy_count_delay = parseInt(fs.readFileSync('buy_count_delay').toString());
 var slippage = parseInt(fs.readFileSync('slippage').toString());
 
-
+trade.setProvider(provider);
 trade.setWallet(private_key)
 trade.setTimeout(timeout);
 

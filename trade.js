@@ -1,6 +1,7 @@
 const ethers = require("ethers");
 const wss = "wss://bsc-ws-node.nariox.org:443";
-const provider = new ethers.providers.WebSocketProvider(wss);
+const jrpc = "https://bsc-dataseed1.binance.org";
+var provider// = new ethers.providers.WebSocketProvider(wss);
 
 const pancake = {
     factory: "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",  //PancakeSwap V2 factory
@@ -17,6 +18,17 @@ var timeout = 5;
 
 exports.setTimeout = (t) => {
     timeout = t;
+}
+
+exports.setProvider = (type) => {
+    if(type === "wss")
+    {
+        provider = new ethers.providers.WebSocketProvider(wss);
+    }
+    else if (type === "jrpc")
+    {
+        provider = new ethers.providers.JsonRpcProvider(jrpc);
+    }
 }
 
 exports.setWallet = (mnemonic) => {

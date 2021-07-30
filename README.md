@@ -46,3 +46,10 @@ wbnb: 0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c
 > { amountIn: 0.001, amountOut: 0.0000033272586079270002 }
 > { amountIn: 0.001, amountOut: 0.0000033272887089190003 }
 ```
+
+## set provider
+```
+node .\cli.js set_provider jrpc # https://bsc-dataseed1.binance.org
+# or
+node .\cli.js set_provider wss # wss://bsc-ws-node.nariox.org:443
+```
